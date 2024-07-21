@@ -5,39 +5,57 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import CustomFormField from "./CustomFormField";
+import CustomFormField from "../CustomFormField";
+import SubmitButton from "../SubmitButton";
+import { useState } from "react";
+import { UserFormValidation } from "@/lib/validation";
+import { useRouter } from "next/router";
 
 export enum FormFieldType {
-    INPUT = 'input',
-    TEXTAREA = 'textarea',
-    PHONE_INPUT = 'phoneInput',
-    CHECKBOX = 'checkbox',
-    DATE_PICKER = 'datePicker',
-    SELECT = 'select',
-    SKELETON = 'skeleton'
+  INPUT = "input",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  CHECKBOX = "checkbox",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton",
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
-
-export function PatientForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export default function PatientForm() {
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  const onSubmit = async ({
+    name,
+    email,
+    phone,
+  }: z.infer<typeof UserFormValidation>) => {
+    setIsLoading(true);
+
+    try {
+      // const userData = {
+      //   name,
+      //   email,
+      //   phone,
+      // };
+
+      // const user = await createUser(userData);
+
+      // if (user) {
+      //   router.push(`/patients/${user.$id}/register`)
+      // }
+    } catch (error) {
+      console.log("error submit => ", error);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -47,17 +65,33 @@ export function PatientForm() {
           <p className="text-dark-700">Schedule your first appointment.</p>
         </section>
 
-        <CustomFormField 
-            control={form.control}
-            fieldType={FormFieldType.INPUT}
-            name="name"
-            label="Full name"
-            placeholder="John Doe"
-            iconSrc="/assets/icons/user.svg"
-            iconAlt="user"
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.INPUT}
+          name="name"
+          label="Full name"
+          placeholder="John Doe"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="user"
+        />
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.INPUT}
+          name="email"
+          label="Email"
+          placeholder="John@mail.com"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="email"
+        />
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.PHONE_INPUT}
+          name="phone"
+          label="Phone Number"
+          placeholder="(62) 123-456"
         />
 
-        <Button type="submit">Submit</Button>
+        <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
     </Form>
   );
