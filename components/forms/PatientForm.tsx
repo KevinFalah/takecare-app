@@ -9,7 +9,8 @@ import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -39,23 +40,28 @@ export default function PatientForm() {
     phone,
   }: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-
+    console.log('submit')
     try {
-      // const userData = {
-      //   name,
-      //   email,
-      //   phone,
-      // };
+      const userData = {
+        name,
+        email,
+        phone,
+      };
 
-      // const user = await createUser(userData);
+      const user = await createUser(userData);
 
-      // if (user) {
-      //   router.push(`/patients/${user.$id}/register`)
-      // }
+      if (user) {
+        router.push(`/patients/${user.$id}/register`)
+      }
     } catch (error) {
       console.log("error submit => ", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const tes = process.env.PROJECT_ID
+  console.log(tes, '<- ess')
 
   return (
     <Form {...form}>
