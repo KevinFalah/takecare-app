@@ -11,11 +11,6 @@ export const {
   NEXT_PUBLIC_ENDPOINT: ENDPOINT,
 } = process.env;
 
-console.log(
-  process.env.NEXT_PUBLIC_PROJECT_ID,
-  process.env.NEXT_PUBLIC_ENDPOINT,
-  "<- projeeec"
-);
 const client = new sdk.Client();
 client
   .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT!)

@@ -8,7 +8,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
   return (
     <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container my-auto ">
+      <section className="remove-scrollbar container ">
         <div className="sub-container">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -20,23 +20,18 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <div className="text-14-regular mt-20 flex justify-between">
-            <p className="justify-items-end text-dark-600 xl:text-left">
-              ©️ 2024 TakecarePulse
-            </p>
-            {/* <Link href="/?admin=true" className="text-green">
-          Admin
-          </Link> */}
-          </div>
+          <p className="copyright py-6">
+            ©️ 2024 TakecarePulse
+          </p>
         </div>
       </section>
 
       <Image
         src="/assets/images/Register-img.png"
-        height={1000}
+        height={200}
         width={1000}
         alt="patient"
-        className="side-img max-w-[520px]"
+        className="side-img max-w-[520px]  p-0"
       />
     </div>
   );
