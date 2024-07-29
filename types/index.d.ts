@@ -54,3 +54,8 @@ declare type SearchParamProps = {
     appointment: Appointment;
     type: string;
   };
+
+  declare type Doctor = {
+    image: string;
+    name: string;
+  }

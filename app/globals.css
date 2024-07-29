@@ -91,7 +91,7 @@
   }
 
   .admin-stat {
-    @apply flex w-full flex-col justify-between gap-5 sm:flex-row xl:gap-10;
+    @apply flex w-full flex-col justify-between gap-5 md:flex-row xl:gap-10;
   }
 
   /* ==== FORM */

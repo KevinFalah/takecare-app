@@ -60,9 +60,6 @@ export default function PatientForm() {
     }
   };
 
-  const tes = process.env.PROJECT_ID
-  console.log(tes, '<- ess')
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

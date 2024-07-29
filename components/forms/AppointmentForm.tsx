@@ -58,7 +58,6 @@ export default function AppointmentForm({
             status = 'pending';
             break;
     }
-    console.log('tes')
     try {
         if (type === 'create' && patientId) {
             const appointmentData = {
@@ -71,10 +70,10 @@ export default function AppointmentForm({
                 status: status as Status
             }
             const appointment = await createAppointment(appointmentData)
-
+            console.log(appointment,' ,- appointment')
             if (appointment) {
                 form.reset();
-                router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`)
+                router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
             }
         }
 
@@ -128,7 +127,7 @@ export default function AppointmentForm({
               <CustomFormField
                 fieldType={FormFieldType.TEXTAREA}
                 control={form.control}
-                name="notes"
+                name="note"
                 label="Enter notes"
                 placeholder="Enter notes"
               />

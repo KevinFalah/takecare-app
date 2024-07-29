@@ -26,7 +26,7 @@ export default async function NewAppointment({
             patientId={patient.$id}
           />
 
-          <p className="justify-items-end text-dark-600 xl:text-left space-y-6">
+          <p className="text-dark-600 xl:text-left space-y-6">
             ©️ 2024 TakecarePulse
           </p>
         </div>
