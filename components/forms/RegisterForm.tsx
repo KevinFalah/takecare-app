@@ -62,22 +62,20 @@ export default function RegisterForm({ user }: { user: User }) {
         birthDate: new Date(values.birthDate),
         identificationDocument: formData
       }
-      console.log(patientData, '<- patientt')
 
       const patient = await registerPatient(patientData);
-      if (patient) router.push(`patients/${user.$id}/new-appointment`);
-
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
+      setIsLoading(false)
     } catch (error) {
       console.log("error submit => ", error);
-    } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   };
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit((onSubmit))}
         className="space-y-12 flex-1"
       >
         <section className="space-y-4">
